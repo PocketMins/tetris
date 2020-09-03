@@ -87,7 +87,7 @@ function moveBlock() {
 document.addEventListener('DOMContentLoaded', () => {
     setInterval(function () {
         // if (currentFrame % 30 === 0) {
-        // }
+        // console.log(dropBlock); }
         createBlock();
         currentFrame++;
         drawBoard()
@@ -136,7 +136,7 @@ function dropBlock() {
                 longBlockY = longBlockY + 1;
             };
         };
-    } else if (longBlockY - 1 === true) {
+    } else if (tetrisBoard[longBlockY + 1][longBlockX] === true) {
         tetrisBoard[longBlockY][longBlockX] = true;
         longBlockX = 3;
         longBlockY = 0;
