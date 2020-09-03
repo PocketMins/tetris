@@ -18,13 +18,26 @@ for (let i = 0; i < tetrisBoard.length; i++) {
 //     }
 // }
 
+
+function checkRow() {
+    for (let i = 0; i < 10; i++) {
+        if (tetrisBoard[19][0] && tetrisBoard[19][1] && tetrisBoard[19][2] && tetrisBoard[19][3] && tetrisBoard[19][4] && tetrisBoard[19][5] && tetrisBoard[19][6] && tetrisBoard[19][7] && tetrisBoard[19][8] && tetrisBoard[19][9] === true) {
+            clearRow(19);
+        };
+    };
+};
+
 function clearRow(rowNumber) {
     const row = tetrisBoard[rowNumber];
     for (let i = 0; i < row.length; i++) {
         row[i] = false;
-    }
-}
-
+        for (let j = 0; j < tetrisBoard.length; j++) {
+            for (let k = 0; k < tetrisBoard[j].length; k++) {
+                tetrisBoard[j][k] = tetrisBoard[j - 1][k]
+            };
+        };
+    };
+};
 // const fillRow = (rowNumber) => {
 //     const row = tetrisBoard[rowNumber];
 //     for (let i = 0; i < row.length; i++) {
@@ -66,10 +79,10 @@ function keyUpHandler(e) {
 }
 
 function moveBlock() {
-    if (leftPressed && longBlockX > 0) {
+    if (leftPressed && longBlockX > 0 && tetrisBoard[longBlockY][longBlockX - 1] === false) {
         tetrisBoard[longBlockY][longBlockX] = false;
         longBlockX = longBlockX - 1;
-    } else if (rightPressed && longBlockX < 9) {
+    } else if (rightPressed && longBlockX < 9 && tetrisBoard[longBlockY][longBlockX + 1] === false) {
         tetrisBoard[longBlockY][longBlockX] = false;
         longBlockX = longBlockX + 1;
     } else if (downPressed && longBlockY < 19 && tetrisBoard[longBlockY + 1][longBlockX] === false) {
@@ -88,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentFrame++;
         drawBoard()
         moveBlock();
+        checkRow();
     }, 1000 / framesPerSecond);
 });
 
