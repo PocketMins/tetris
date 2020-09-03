@@ -129,7 +129,7 @@ function longBlock() {
 };
 
 function dropBlock() {
-    if (longBlockY < 19) {
+    if (longBlockY < 20) {
         if (currentFrame % 30 === 0) {
             tetrisBoard[longBlockY][longBlockX] = false;
             console.log(blockMoving);
@@ -141,8 +141,9 @@ function dropBlock() {
         };
     } else if (longBlockY = 19) {
         tetrisBoard[longBlockY][longBlockX] = true;
-        let longBlockX = 3;
-        let longBlockY = 0;
+        longBlockX = 3;
+        longBlockY = 0;
         blockMoving = false;
+        console.log(blockMoving);
     };
 };
