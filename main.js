@@ -129,21 +129,22 @@ function longBlock() {
 };
 
 function dropBlock() {
-    if (longBlockY < 20) {
+    if (longBlockY < 19) {
         if (currentFrame % 30 === 0) {
             tetrisBoard[longBlockY][longBlockX] = false;
-            console.log(blockMoving);
-            console.log(dropBlock);
-            console.log(longBlockY);
             if (longBlockY <= tetrisBoard.length - 1) {
                 longBlockY = longBlockY + 1;
             };
         };
+    } else if (longBlockY - 1 === true) {
+        tetrisBoard[longBlockY][longBlockX] = true;
+        longBlockX = 3;
+        longBlockY = 0;
+        blockMoving = false;
     } else if (longBlockY = 19) {
         tetrisBoard[longBlockY][longBlockX] = true;
         longBlockX = 3;
         longBlockY = 0;
         blockMoving = false;
-        console.log(blockMoving);
-    };
+    }
 };
