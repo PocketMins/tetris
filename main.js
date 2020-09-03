@@ -66,19 +66,15 @@ function keyUpHandler(e) {
 }
 
 function moveBlock() {
-    if (blockMoving) {
-        if (leftPressed && longBlockX > 0) {
-            tetrisBoard[longBlockY][longBlockX] = false;
-            longBlockX = longBlockX - 1;
-        }
-        else if (rightPressed && longBlockX < 9) {
-            tetrisBoard[longBlockY][longBlockX] = false;
-            longBlockX = longBlockX + 1;
-        }
-        else if (downPressed && longBlockY < 19) {
-            tetrisBoard[longBlockY][longBlockX] = false;
-            longBlockY = longBlockY + 1;
-        };
+    if (leftPressed && longBlockX > 0) {
+        tetrisBoard[longBlockY][longBlockX] = false;
+        longBlockX = longBlockX - 1;
+    } else if (rightPressed && longBlockX < 9) {
+        tetrisBoard[longBlockY][longBlockX] = false;
+        longBlockX = longBlockX + 1;
+    } else if (downPressed && longBlockY < 19 && tetrisBoard[longBlockY + 1][longBlockX] === false) {
+        tetrisBoard[longBlockY][longBlockX] = false;
+        longBlockY = longBlockY + 1;
     };
 };
 
@@ -114,12 +110,9 @@ function drawBoard() {
 }
 
 function createBlock() {
-    if (blockMoving === false) {
-        blockMoving = true;
-    }  else if (blockMoving) {
-            dropBlock();
-            longBlock();
-    }
+    dropBlock();
+    longBlock();
+
 };
 
 function longBlock() {
@@ -129,22 +122,20 @@ function longBlock() {
 };
 
 function dropBlock() {
-    if (longBlockY < 19) {
-        if (currentFrame % 30 === 0) {
-            tetrisBoard[longBlockY][longBlockX] = false;
-            if (longBlockY <= tetrisBoard.length - 1) {
-                longBlockY = longBlockY + 1;
-            };
-        };
+    if (longBlockY === 19) {
+        tetrisBoard[longBlockY][longBlockX] = true;
+        longBlockX = 3;
+        longBlockY = 0;
     } else if (tetrisBoard[longBlockY + 1][longBlockX] === true) {
         tetrisBoard[longBlockY][longBlockX] = true;
         longBlockX = 3;
         longBlockY = 0;
-        blockMoving = false;
-    } else if (longBlockY = 19) {
-        tetrisBoard[longBlockY][longBlockX] = true;
-        longBlockX = 3;
-        longBlockY = 0;
-        blockMoving = false;
-    }
+    } else if (longBlockY < 19) {
+        if (currentFrame % 30 === 0) {
+        tetrisBoard[longBlockY][longBlockX] = false;
+        if (longBlockY <= tetrisBoard.length - 1) {
+            longBlockY = longBlockY + 1;
+            }
+        };
+    };
 };
