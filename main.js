@@ -50,6 +50,7 @@ const instantDown = () => {
     blockY = 19;
   }
   setBlock(true);
+  createNewBlock();
 };
 
 const canBlockMoveRight = () => {
@@ -111,7 +112,6 @@ function moveBlockDown() {
     blockY = blockY + 1;
     setBlock(true);
   }
-  console.log(instantDown);
 }
 
 const createNewBlock = () => {
