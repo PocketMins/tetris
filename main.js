@@ -3,6 +3,7 @@ const framesPerSecond = 30;
 let blockX;
 let blockY;
 let currentFrame = 0;
+let blockShape;
 
 for (let i = 0; i < tetrisBoard.length; i++) {
   tetrisBoard[i] = new Array(10).fill(false);
@@ -115,6 +116,28 @@ function moveBlockDown() {
 }
 
 const createNewBlock = () => {
+  // switch (Math.floor(Math.random() * 1)) {
+  //   case 0:
+  //     blockShape = blockI();
+  //     break;
+  //   case 1:
+  //     blockShape = blockO();
+  //     break;
+  //   case 2:
+  //     blockShape = blockT();
+  //     break;
+  //   case 3:
+  //     blockShape = blockL();
+  //     break;
+  //   case 4:
+  //     blockShape = blockJ();
+  //     break;
+  //   case 5:
+  //     blockShape = blockS();
+  //     break;
+  //   case 6:
+  //     blockShape = blockZ();
+  // }
   blockX = 3;
   blockY = 0;
   setBlock(true);
@@ -146,4 +169,11 @@ const isRowComplete = (rowNumber) => {
 const shiftRowsAboveDown = (rowNumber) => {
   tetrisBoard.splice(rowNumber, 1);
   tetrisBoard.unshift(new Array(10).fill(false));
+};
+
+const blockI = (value) => {
+  tetrisBoard[blockY][blockX] = value;
+  tetrisBoard[blockY + 1][blockX] = value;
+  tetrisBoard[blockY + 2][blockX] = value;
+  tetrisBoard[blockY + 3][blockX] = value;
 };
