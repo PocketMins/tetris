@@ -25,14 +25,17 @@ function keyDownHandler(e) {
 }
 
 const moveBlockLeft = () => {
-  setBlock(false);
-  blockX = blockX - 1;
-  setBlock(true);
+  moveBlock(blockY, blockX - 1);
 };
 
 const moveBlockRight = () => {
+  moveBlock(blockY, blockX + 1);
+};
+
+const moveBlock = (y, x) => {
   setBlock(false);
-  blockX = blockX + 1;
+  blockX = x;
+  blockY = y;
   setBlock(true);
 };
 
@@ -82,9 +85,7 @@ function moveBlockDown() {
   if (isBlockAtBottom()) {
     createNewBlock();
   } else {
-    setBlock(false);
-    blockY = blockY + 1;
-    setBlock(true);
+    moveBlock(blockY + 1, blockX);
   }
 }
 
